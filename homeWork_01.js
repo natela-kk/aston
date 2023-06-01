@@ -152,3 +152,73 @@ class MyPrototypeClass {
 
 const counterPrototype = new MyPrototypeClass(0);
 const counter13 = counterPrototype.produce();
+
+// 3 Создание функции
+
+// FD
+function makeCounter() {
+    return { value: 0 };
+}
+
+// FE
+const makeCounter = function () {
+    return { value: 0 };
+}
+
+// Arrow Function
+const makeCounter = () => 0;
+
+const makeCounter = () => {
+    return { value: 0 };
+}
+
+// NFE
+const makeCounter = function makeCounterInner(value) {
+    if (value >= 0) {
+        alert(`Your score is ${value}`)
+    } else {
+        makeCounterInner(0);
+    }
+}
+
+//anonymus function
+const arr = [1, 2, 3];
+const newArr = arr.map(i => i * 2);
+
+// callback function
+const makeCounter = (value) => {
+    console.log(`Your score is ${value}`)
+}
+
+const randomFunction = (callback) => {
+    const score = Math.floor(Math.random() * 10);
+    callback(score);
+}
+
+randomFunction(makeCounter);
+
+// constructor function
+function MyConstructor(value) {
+    this.value = value;
+    this.increase = function () {
+        this.value++;
+    };
+    this.decrease = function () {
+        this.value--;
+    }
+}
+
+const makeCounter = new MyConstructor(10);
+
+// IIFE
+(function () {
+    console.log('IIFE invoked')
+}())
+
+// higher-order function
+function makeCounter() {
+    const count = 1;
+    return function () {
+        return count * 2;
+    }
+}
