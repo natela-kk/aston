@@ -225,11 +225,27 @@ function makeCounter() {
 
 // Бонус задание 1
 // Функция глубокого сравнения двух объектов
+function compareDeep1(obj1, obj2) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
 
+function compareDeep2(obj1, obj2) {
+    const obj1Keys = Object.keys(obj1);
+    const obj2Keys = Object.keys(obj2);
+    if (obj1Keys.length !== obj2Keys.length) return false
+    for (key in obj1) {
+        if (typeof obj1[key] === 'object' && !compareDeep2(obj1[key], obj2[key])) return false
+        else if (typeof obj1[key] === 'function') {
+            if (obj1[key].toString() !== obj2[key].toString()) return false
+        }
+        else if (obj1[key] !== obj2[key]) return false
+    }
+    return true;
+}
 
 // Бонус Задание 2
 // Развернуть строку в обратном направлении при помощи методов массивов
 
 function reverseStr(str) {
-  return str.split('').reverse().join('');
+    return str.split('').reverse().join('');
 }
