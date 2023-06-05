@@ -21,3 +21,11 @@ logger.apply(obj);
 
 // bind
 logger.bind(obj)();
+
+// Бонус Задание 
+// Полифил метода bind
+function bindFoo(foo, obj) {
+    return function() {
+        foo.apply(obj, [...arguments])
+    }
+}
