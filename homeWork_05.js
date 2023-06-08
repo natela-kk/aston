@@ -76,3 +76,56 @@ class PersonThreePro extends PersonThree {
         this.greeting = `Hello, ${name}`
     }
 }
+
+// БОНУС: 
+// 1) Написать функцию, которая вернет массив с первой парой чисел, сумма которых равна total:
+
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+total = 13;
+//result = [4, 9]
+
+// Сложность O(n²)
+const firstSum = (arr, total) => {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 1; j < arr.length; j++) {
+            if (arr[i] + arr[j] === total) return [arr[i], arr[j]]
+        }
+    }
+}
+
+firstSum(arr, total)
+
+// Сложность O(n*log(n))
+// для сортированных массивов
+const firstSum2 = (arr, total) => {
+    let start = 0;
+    let end = arr.length - 1;
+
+    while (start < end) {
+        if (arr[start] + arr[end] === total) return [arr[start], arr[end]];
+        else if (arr[start] + arr[end] < total) {
+            start++;
+        }
+        else if (arr[start] + arr[end] > total) {
+            end--;
+        }
+    }
+    return null;
+}
+
+firstSum2(arr, total)
+
+// Сложность O(2n)
+const firstSum3 = (arr, total) => {
+    const map = new Map();
+
+    for (let i = 0; i < arr.length; i++) {
+        map.set(arr[i], i);
+    }
+    for (let i = 0; i < arr.length; i++) {
+        if (map.has(total - arr[i])) return [arr[i], total - arr[i]]
+    }
+    return null;
+}
+
+firstSum3(arr, total)
